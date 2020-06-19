@@ -1,0 +1,31 @@
+poseoptim_using_unit_sphere: True
+scan_epi_unit_sphere: True
+
+use_edgelets: True
+use_imu: False
+use_ceres_backend: False
+img_align_min_level: 0
+max_fts: 150
+grid_size: 35
+init_min_disparity: 15
+limit_n_fts: True
+map_scale: 10
+add_frame_seeds: True
+dataset_first_frame: 0
+quality_min_fts: 10
+update_seeds_with_old_keyframes: True ## TEST
+use_threaded_depthfilter: False ## DEBUG
+
+seed_convergence_sigma2_thresh: 200
+quality_max_drop_fts: 100
+reprojector_max_n_kfs: 10
+max_n_kfs: 10
+
+kfselect_criterion: FORWARD
+kfselect_numkfs_upper_thresh: 150
+kfselect_numkfs_lower_thresh: 60
+kfselect_min_dist_metric: 0.04
+kfselect_min_disparity: 20
+kfselect_min_angle: 6
+kfselect_min_num_frames_between_kfs: 0 # TEST
+

@@ -1,0 +1,11 @@
+<launch>
+   <node name="act_map" pkg="act_map_ros" type="trace_map_server_node" output="screen" args="-alsologtostderr --v=1" clear_params="true">
+     <rosparam command="load" file="$(find act_map_ros)/params/act_map_euroc.yaml"/>
+     <param name="features3d_topic_name" value="/svo/features3d" />
+     <param name="body_pose_topic_name" value="/svo/Twb" />
+     <param name="cam_frame0" value="cam_pos" />
+   </node>
+
+ <node type="rviz" name="rviz" pkg="rviz" args="-d $(find act_map_ros)/cfgs/sim.rviz" />
+
+</launch>
