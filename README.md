@@ -19,4 +19,4 @@ An example of trajectory optimization in action:
 For illustration purpose, the trajectory optimization is done in two steps with the following costs: 1) collision + dynamic; 2) collision + dynamic + localization quality.
 The optimized trajectory of the first step is shown in red, and the second step in green.
 The yellow points are the landmarks for localization, and the colored overlay is ESDF built with [voxblox](https://github.com/ethz-asl/voxblox).
-The green trajectory, which in addition considers the localization quality, prefer to look at landmark-rich regions and move close to landmarks.
+The green trajectory, which in addition considers the localization quality, prefers to look at landmark-rich regions and move close to landmarks.
