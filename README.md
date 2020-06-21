@@ -21,7 +21,7 @@ If you use this code in academic work, please cite the above paper.
 
 ### Credit
 The implementation of the information field uses the [voxel hashing](http://niessnerlab.org/papers/2013/4hashing/niessner2013hashing.pdf) algorithm implemented in [Voxblox](https://arxiv.org/abs/1611.03631).
-The code we extracted from [Voxblox repository](https://github.com/ethz-asl/voxblox) is put in separate folders (`voxblox` and `voxblox_ros`). If you use the code specific to `Voxblox`, please see their repository and cite relevant publications accordingly.
+The code we extracted from [Voxblox repository](https://github.com/ethz-asl/voxblox) is put in separate folders (`voxblox` and `voxblox_ros`), and the license is retained in `LICENSE_voxblox`. If you use the code specific to `Voxblox`, please see their repository and cite relevant publications accordingly.
 
 ### Contained packages
 
