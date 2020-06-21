@@ -1,13 +1,13 @@
 # Fisher Information Field: an Efficient and Differentiable Map for Perception-aware Planning
 
-> **For an earlier version of this work that is published at ICRA 19, please checkout the `icra19` branch.**
+> **For an earlier version of this work that was published at ICRA 19, please checkout the `icra19` branch.**
 
 > [21-06-2020] The code and preprint will be available in the next weeks.
 
 This repository contains an implementation of the **Fisher Information Field** (FIF for short), a map representation designed for perception-aware planning.
 The core function of the map is to evaluate the visual localization quality at a given 6 DoF pose in a known environment (consisting of 3D landmarks to localize against).
 It can be used with different motion planning algorithms (e.g., RRT-star, trajectory optimization) to take localization quality into consideration, in addition to common planning objectives (collision free, low dynamic cost, start and end states etc).
-The main advantage of FIF is its efficiency at the planning time: it is 1~2 order-of-magnitude faster than using the landmarks directly.
+The main advantage of FIF is its efficiency at the planning time: it is 1~2 order-of-magnitude faster than using the landmarks directly in our experiments.
 
 An example of trajectory optimization in action:
 * 4 DoF piecewise polynomial trajectory for quadrotors. 10 seconds duration, 5 segments.
