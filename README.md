@@ -7,7 +7,11 @@
       - [Simulation](#simulation)
       - [Real data with ROS](#real-data-with-ros)
 
-This repository contains an implementation of the following paper
+This repository contains an implementation of the following paper:
+
+Paper: [Beyond Point Clouds: Fisher Information Field for Active Visual Localization (ICRA19)](http://rpg.ifi.uzh.ch/docs/ICRA19_Zhang.pdf) 
+
+Video: [Youtube](https://youtu.be/q3YqIyaFUVE) 
 
     @INPROCEEDINGS{Zhang19icra, 
       author    = {Zichao Zhang and Davide Scaramuzza}, 
