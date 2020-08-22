@@ -1,0 +1,27 @@
+<launch>
+   <node name="simulator" pkg="act_map_ros" type="simulator_server_node" output="screen" args="--alsologtostderr --v=1" clear_params="true">
+     <param name="good_pts_topic_name" value="features3d" />
+     <param name="body_pose_topic_name" value="Twb" />
+     <param name="abs_traj_fn" value="$(find act_map_ros)/test_data/ycorridor_6x20.csv" />
+     <param name="abs_map_fn" value="$(find act_map_ros)/test_data/ycorridor_6x20_points_w.txt" />
+     <!--<param name="abs_traj_fn" value="$(find act_map_ros)/test_data/tangent_2m.csv" />-->
+     <!--<param name="abs_map_fn" value="$(find act_map_ros)/test_data/four_walls_points_w.txt" />-->
+     <!--<param name="abs_map_fn" value="$(find act_map_ros)/test_data/seg_walls_points_w.txt" />-->
+     <param name="abs_cam_dir" value="$(find act_map_ros)/test_data" />
+     <param name="sim_dt_sec" value="0.1"/>
+     <param name="min_obs" value="8"/>
+     <param name="loop_sim" value="true"/>
+     <param name="cam_min_depth" value="0.5"/>
+     <param name="cam_max_depth" value="3"/>
+  </node>
+
+   <node name="act_map" pkg="act_map_ros" type="trace_map_server_node" output="screen" args="-alsologtostderr --v=1" clear_params="true">
+     <rosparam command="load" file="$(find act_map_ros)/params/act_map_sim.yaml"/>
+     <param name="features3d_topic_name" value="/simulator/features3d" />
+     <param name="body_pose_topic_name" value="/simulator/Twb" />
+     <param name="cam_frame0" value="cam0" />
+   </node>
+
+ <node type="rviz" name="rviz" pkg="rviz" args="-d $(find act_map_ros)/cfgs/sim.rviz" />
+
+</launch>

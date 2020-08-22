@@ -1,0 +1,7 @@
+tsdf_voxel_size: 0.1
+tsdf_voxels_per_side: 16
+max_ray_length_m: 20
+min_ray_length_m: 0.2
+esdf_max_distance_m: 10
+esdf_min_distance_m: 0.2
+esdf_default_distance_m: 10

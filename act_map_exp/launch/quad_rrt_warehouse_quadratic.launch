@@ -1,0 +1,47 @@
+<launch>
+  <arg name='node_name' default="quad_rrt" />
+  <arg name='kernel_type' default="QInfo" />
+  <node name="$(arg node_name)" pkg="act_map_exp" type="quad_rrt_node" output="screen" args="-alsologtostderr --v=1 --kernel_type=$(arg kernel_type)" clear_params="true">
+     <!--act map server parameters-->
+     <rosparam command="load" file="$(find act_map_ros)/params/act_map_warehouse.yaml"/>
+     <param name="gp_vis_dir" value="$(find act_map)/params/fov_approximator_gp/fs45_fs70_lm1000_k15" />
+     <param name="vis_half_fov_rad0" value="0.7854" />
+     <param name="vis_boundary_ratio0" value="0.5" />
+     <param name="vis_boundary_val0" value="0.5" />
+
+     <param name="preset_occ_layer" value="false" />
+     <param name="preset_kernel_layer" value="false" />
+     <param name="slice_level" value="2" />
+     <param name="color_mode" value="colors" />
+     <!-- for baseline visibility check -->
+     <param name="vis_check_use_depth_layer" value="true" />
+     <param name="vis_check_depth_layer_proto_fn" value="$(find act_map_exp)/exp_data/warehouse_depth_and_landmarks/depthmap.proto" />
+     <param name="vis_check_use_camera" value="true" />
+     <param name="vis_check_cam_dir" value="$(find act_map_exp)/exp_data/warehouse_cam" />
+
+     <!--esdf server parameters-->
+     <param name="update_mesh_every_n_sec" value="-1.0" />
+     <param name="update_esdf_every_n_sec" value="-1.0" />
+     <param name="verbose" value="true" />
+     <param name="publish_slices" value="true" />
+     <param name="publish_pointclouds" value="true" />
+     <param name="publish_esdf_map" value="false" />
+     <param name="publish_tsdf_map" value="false" />
+     <rosparam file="$(find act_map_ros)/params/voxblox_warehouse_extrinsics.yaml"/>
+     <rosparam file="$(find act_map_ros)/params/voxblox_warehouse_scale.yaml"/>
+     <remap from="$(arg node_name)/load_map" to="$(arg node_name)/load_esdf_map" />
+     <remap from="$(arg node_name)/save_map" to="$(arg node_name)/save_esdf_map" />
+     <remap from="$(arg node_name)/publish_map" to="$(arg node_name)/publish_esdf_map" />
+     <remap from="$(arg node_name)/publish_pointclouds" to="$(arg node_name)/publish_esdf_pointclouds" />
+
+     <!--input-->
+     <remap from="$(arg node_name)/esdf_map_in" to="esdf_map" />
+     <remap from="$(arg node_name)/tsdf_map_in" to="tsdf_map" />
+     <remap from="$(arg node_name)/ker_layer_in" to="kernel_layer" />
+     <remap from="$(arg node_name)/occ_layer_in" to="occupancy_layer" />
+
+     <!--trajectory optimization related-->
+     <rosparam command="load" file="$(find act_map_exp)/params/quad_rrt/quad_rrt_warehouse_base.yaml"/>
+
+   </node>
+</launch>

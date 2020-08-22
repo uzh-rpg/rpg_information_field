@@ -1,0 +1,6 @@
+fov45_fs30_lm1000_k15 fs30_k15
+fov45_fs50_lm1000_k15 fs50_k15
+fov45_fs70_lm1000_k15 fs70_k15
+fov45_fs100_lm1000_k15 fs100_k15
+fov45_fs120_lm1000_k15 fs120_k15
+fov45_fs150_lm1000_k15 fs150_k15

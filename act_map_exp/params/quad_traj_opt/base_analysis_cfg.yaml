@@ -1,0 +1,58 @@
+colors:
+  none: red
+  gp_trace: green
+  gp_det: green
+  quad_trace: blue
+  quad_det: blue
+  pc_trace: gray
+  pc_det: gray
+linestyles:
+  none: solid
+  gp_trace: dashed
+  gp_det: solid
+  quad_trace: dashed
+  quad_det: solid
+  pc_trace: dashed
+  pc_det: solid
+labels:
+  none: "No Info."
+  gp_trace: GP-Trace
+  gp_det: GP-Det
+  quad_det: Quad-Det
+  quad_trace: Quad-Trace
+  pc_det: PC-Det
+  pc_trace: PC-Trace
+ordered_types:
+  - none
+  - quad_det
+  - quad_trace
+  - pc_det
+  - pc_trace
+  - gp_trace
+  - gp_det
+solve_time_table:
+  - gp_det
+  - gp_trace
+  - quad_det
+  - quad_trace
+  - pc_det
+  - pc_trace
+  - none
+iter_cost_plot:
+  det:
+    - gp_det
+    - quad_det
+    - pc_det
+  trace:
+    - gp_trace
+    - quad_trace
+    - pc_trace
+  all:
+    - gp_det
+    - gp_trace
+    - quad_det
+    - quad_trace
+    - pc_det
+    - pc_trace
+hist_max_trans_e: 0.5
+hist_max_rot_e: 5

@@ -1,0 +1,51 @@
+# general options
+integral_cost_sample_dt: 0.1
+ceres_use_logger: true
+ceres_parameter_tolerance: 1e-8
+ceres_function_tolerance: 1e-6
+ceres_max_iter: 100
+ceres_line_search_type: LBFGS
+viz_every_iter_pause_sec: 0.01
+viz_observations_every_n: 8
+viz_link_size: 0.08
+second_stage_opt_yaw_only: false
+use_info_potential: true
+calculate_info_from_pc: false
+info_metric_use_log_det: true
+text_pos: [-15.0, 54.0, 20.0]
+visualize_iter_cnt: false
+visualize_text_scale: 3.0
+
+opt_type: Ceres
+
+# trajectory specification
+total_time: 10
+waypoints:
+  # mid
+  # - [-4.00, 16.0, 2.0, 0.0]
+  # - [-10.00, 50.00, 2.0, 0.0]
+  # left (top)
+  # - [-4.00, 16.0, 2.0, 0.0]
+  # - [-20.00, 50.00, 2.0, 0.0]
+  # side
+  # - [-0.00, 20.0, 2.0, 0.0]
+  # - [-20.00, 20.00, 2.0, 0.0]
+  # right (bottom)
+  - [-4.00, 16.0, 2.0, 0.0] 
+  - [-0.00, 50.00, 2.0, 0.0]
+num_segments:
+  - 5
+T_BC:
+  [1, 0, 0, 0,
+   0, 0, 1, 0.3,
+   0, -1, 0, 0,
+   0, 0, 0, 1 ]
+info_metric_type: det
+ceres_opt_type: Joint
+ceres_cost:
+  - PosDynamic: 0.01
+  - YawDynamic: 2.0
+  - ESDF: 2e4
+  - Info: 1.5
+
+save_traj_abs_dir: /home/zichao/sources/FIF_ws/src/rpg_information_field/act_map_exp/trace/quad_traj_opt/warehouse_trial

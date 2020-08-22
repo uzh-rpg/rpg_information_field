@@ -1,0 +1,14 @@
+robot_radius: 0.5
+collision_margin: 1.5
+
+info_pot_n_random_lm: 200
+info_pot_min_depth_m: 0.3
+info_pot_max_depth_m: 1.0
+info_metric_use_log_det: true
+info_pot_average_over_n: 50
+info_pot_use_negative_info: false
+
+visualize_visible_points: true
+visualize_text_scale: 10.0
+
+save_sample_dt: 0.1

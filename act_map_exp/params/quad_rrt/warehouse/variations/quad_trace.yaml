@@ -1,0 +1,5 @@
+node: quad_rrt_quadratic_trace
+type: quad_trace
+info_metric_type: trace
+use_joint_checker: true
+calculate_info_from_pc: false

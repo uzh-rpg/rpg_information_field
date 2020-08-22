@@ -1,0 +1,26 @@
+colors:
+  none: red
+  gp_trace: green
+  gp_det: green
+  quad_trace: blue
+  quad_det: blue
+  pc_trace: gray
+  pc_det: gray
+linestyles:
+  none: solid
+  gp_trace: dashed
+  gp_det: solid
+  quad_trace: dashed
+  quad_det: solid
+  pc_trace: dashed
+  pc_det: solid
+labels:
+  none: "No Info."
+  gp_trace: GP-Trace
+  gp_det: GP-Det
+  quad_det: Quad-Det
+  quad_trace: Quad-Trace
+  pc_det: PC-Det
+  pc_trace: PC-Trace
+hist_max_trans_e: 1
+hist_max_rot_e: 10

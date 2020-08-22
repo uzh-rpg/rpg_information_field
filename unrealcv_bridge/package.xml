@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>unrealcv_bridge</name>
+  <version>0.0.0</version>
+  <description>UnreadCV scripts.</description>
+
+  <maintainer email="zhangzichao17@gmail.com">Zichao Zhang</maintainer>
+
+  <license>RPG</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin_simple</buildtool_depend>
+
+  <depend>glog_catkin</depend>
+  <depend>eigen_catkin</depend>
+  <depend>rpg_common</depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+  </export>
+</package>

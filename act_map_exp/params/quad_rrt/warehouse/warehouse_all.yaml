@@ -1,0 +1,13 @@
+all_cfg:
+  base:
+    top.yaml: top
+    diagonal.yaml: diagonal
+    bottom.yaml: bottom
+  var:
+    - variations/none.yaml
+    - variations/gp_det.yaml
+    - variations/quad_det.yaml
+    - variations/pc_det.yaml
+    - variations/gp_trace.yaml
+    - variations/quad_trace.yaml
+    - variations/pc_trace.yaml

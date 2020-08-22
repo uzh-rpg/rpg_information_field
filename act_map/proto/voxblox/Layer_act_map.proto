@@ -1,0 +1,11 @@
+// copied from voxblox
+package act_map;
+
+message LayerProto {
+  optional double voxel_size = 1;
+
+  optional uint32 voxels_per_side = 2;
+
+  // See voxblox::voxel_type
+  optional string type = 3;
+}

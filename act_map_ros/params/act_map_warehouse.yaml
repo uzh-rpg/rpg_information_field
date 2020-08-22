@@ -1,0 +1,73 @@
+# occupancy and integrator
+preset_occ_layer: false
+occ_vox_size: 0.01
+occ_vox_per_side: 16
+occ_prob_hit: 0.9
+occ_prob_miss: 0.1
+occ_thresh_min: 0.12
+occ_thresh_max: 0.97
+occ_thresh_occupancy: 0.7
+occ_min_ray_m: 0.1
+occ_max_ray_m: 30
+
+# kernel layer
+ker_vox_size: 1
+ker_vox_per_side: 3
+preset_kernel_layer: true
+preset_kernel_layer_ranges: [-23.0, 3.0, 14.0, 65.0, 1.0, 7.0]
+
+# depth layer
+vis_check_use_depth_layer: false
+depth_layer_vox_size: 1
+depth_layer_vox_per_side: 3
+depth_vox_deg_step: 2
+
+# kernel integrator
+ker_inte_occ_thresh: 0.6
+# ker_update_mode: batch
+ker_update_mode: demand
+# ker_update_mode: increment
+batch_recompute_occ_thresh: 0.5
+
+# visibility check
+vis_check_use_view_filter: true
+vis_check_min_dist: 0.1
+vis_check_max_dist: 30
+vis_check_max_ang_deg: 60.0
+
+# kernel expansion
+kernel_expand_ranges: [3.0, 3.0, 2.0]
+only_activate_nearby_kernel_blks: false
+kernel_blks_activate_dist: 3.0
+kernel_expand_dist_thresh: 0.5  # half block size
+
+# visibility approaximation
+vis_half_fov_rad0: 0.7854
+vis_boundary_ratio0: 0.5
+vis_boundary_val0: 0.5
+
+# collision checking
+use_collision_checker: false
+occ_min_dist_thresh: 0.2
+occ_average_dist_thresh: 0.4
+
+# map itself
+n_cams: 1
+
+# visualziation
+viz_occupancy: true
+
+viz_allocated_kernel_blk: true
+viz_active_kernel_blk: false
+
+viz_kvox_best_view: true
+viz_kvox_bview_samples_per_side: 1
+viz_bview_use_sampling: true
+viz_bview_incremental_every_n: 2
+viz_bview_last_updated: false
+viz_bview_size: 0.14
+viz_bview_size_vox_ratio: 0.45
+viz_bview_use_unique_id: true
+viz_cam_marker_size: 0.5
+viz_bview_fixed_color: false
+viz_bview_color_scale_log_n: 1

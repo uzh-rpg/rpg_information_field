@@ -1,0 +1,24 @@
+<launch>
+   <arg name="rviz" default="false" />  
+   <arg name="map_suf" />
+
+   <node name="act_map" pkg="act_map_ros" type="info_map_server_node" output="screen" args="-alsologtostderr --v=1" clear_params="true">
+     <rosparam command="load" file="$(find act_map_ros)/params/act_map_warehouse.yaml"/>
+     <param name="gp_vis_dir" value="$(find act_map)/params/fov_approximator_gp/fov45_fs70_lm1000_k15" />
+     <param name="vis_half_fov_rad0" value="0.7854" />
+     <param name="vis_boundary_ratio0" value="0.5" />
+     <param name="vis_boundary_val0" value="0.5" />
+
+     <param name="preset_occ_layer" value="true" />
+     <param name="occ_points_fn" value="$(find act_map_exp)/exp_data/warehouse_depth_and_landmarks/warehouse_points3D_$(arg map_suf).txt" />
+     <param name="aver_views_fn" value="$(find act_map_exp)/exp_data/warehouse_depth_and_landmarks/warehouse_view_dirs_$(arg map_suf).txt" />
+     <param name="vis_check_use_depth_layer" value="true" />
+     <param name="vis_check_depth_layer_proto_fn" value="$(find act_map_exp)/exp_data/warehouse_depth_and_landmarks/depthmap.proto" />
+
+     <remap from="act_map/ker_layer_out" to="kernel_layer" />
+     <remap from="act_map/occ_layer_out" to="occupancy_layer" />
+   </node>
+
+   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find act_map_ros)/cfgs/warehouse.rviz" if="$(arg rviz)"/>
+
+</launch>

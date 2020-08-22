@@ -1,0 +1,34 @@
+<launch>
+   <node name="base_planner" pkg="act_map_exp" type="planner_base_node" output="screen" args="-alsologtostderr --v=1" clear_params="true">
+     <!--act map server parameters-->
+     <rosparam command="load" file="$(find act_map_ros)/params/act_map_warehouse.yaml"/>
+     <param name="gp_vis_dir" value="$(find act_map)/params/fov_approximator_gp/fov40_fs50_lm1000_k10_fast" />
+     <param name="preset_occ_layer" value="false" />
+     <param name="preset_kernel_layer" value="false" />
+     <param name="vis_check_use_depth_layer" value="false" />
+     <param name="slice_level" value="3" />
+     <param name="color_mode" value="colors" />
+
+     <!--esdf server parameters-->
+     <param name="update_mesh_every_n_sec" value="-1.0" />
+     <param name="update_esdf_every_n_sec" value="-1.0" />
+     <param name="verbose" value="true" />
+     <param name="publish_slices" value="true" />
+     <param name="publish_pointclouds" value="true" />
+     <param name="publish_esdf_map" value="false" />
+     <param name="publish_tsdf_map" value="false" />
+     <rosparam file="$(find act_map_ros)/params/voxblox_warehouse_extrinsics.yaml"/>
+     <rosparam file="$(find act_map_ros)/params/voxblox_warehouse_scale.yaml"/>
+     <remap from="base_planner/load_map" to="base_planner/load_esdf_map" />
+     <remap from="base_planner/save_map" to="base_planner/save_esdf_map" />
+     <remap from="base_planner/publish_map" to="base_planner/publish_esdf_map" />
+     <remap from="base_planner/publish_pointclouds" to="base_planner/publish_esdf_pointclouds" />
+
+     <!--input-->
+     <remap from="base_planner/esdf_map_in" to="esdf_map" />
+     <remap from="base_planner/tsdf_map_in" to="tsdf_map" />
+     <remap from="base_planner/ker_layer_in" to="kernel_layer" />
+     <remap from="base_planner/occ_layer_in" to="occupancy_layer" />
+
+   </node>
+</launch>

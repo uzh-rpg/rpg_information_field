@@ -1,0 +1,5 @@
+node: quad_rrt_quadratic_info
+type: quad_det
+info_metric_type: det
+use_joint_checker: true
+calculate_info_from_pc: false

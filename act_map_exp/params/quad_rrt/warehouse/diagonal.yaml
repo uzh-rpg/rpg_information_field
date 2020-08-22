@@ -1,0 +1,32 @@
+# path 2: diagonal
+start: [0.0, 53.0, 2.0]
+end: [-16.5, 16.5, 2.0]
+start_yaw_deg: 90
+end_yaw_deg: 90
+
+#use_joint_checker: true
+use_esdf_checker: true
+
+iter_time_sec: 5.0
+max_n_iter: 100
+min_n_iter: 100
+converge_ratio: 0.005
+viz_every_outer_iter: true
+
+rrt_range: 4.0
+
+#calculate_info_from_pc: false
+#info_metric_type: det
+info_pot_min_depth_m: 1.0
+info_pot_max_depth_m: 3.0
+info_pot_n_random_lm: 10
+
+T_BC:
+  [1, 0, 0, 0,
+   0, 0, 1, 0.3,
+   0, -1, 0, 0,
+   0, 0, 0, 1 ]
+rrt_cost:
+  - Yaw: 1.0
+  - Dist: 1.0
+#  - Info: 1.0

@@ -1,0 +1,5 @@
+node: quad_rrt_gp_trace
+type: gp_trace
+info_metric_type: trace
+use_joint_checker: true
+calculate_info_from_pc: false

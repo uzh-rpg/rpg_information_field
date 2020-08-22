@@ -1,0 +1,6 @@
+- bottom/bottom_gp_det: {label: GP-Det, color: seagreen}
+- bottom/bottom_none: {label: "No Info.", color: darkred}
+- top/top_gp_det: {label: None, color: seagreen}
+- top/top_none: {label: None, color: darkred}
+- diagonal/diagonal_gp_det: {label: None, color: seagreen}
+- diagonal/diagonal_none: {label: None, color: darkred}

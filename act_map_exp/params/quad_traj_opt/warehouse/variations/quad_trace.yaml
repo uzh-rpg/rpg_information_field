@@ -1,0 +1,3 @@
+node: quad_traj_opt_quadratic_trace
+type: quad_trace
+info_metric_type: trace

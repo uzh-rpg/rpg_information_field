@@ -1,0 +1,16 @@
+<launch>
+   <arg name="rviz" default="true" />  
+   <include file="$(find act_map_ros)/launch/external/mfov_mono.launch" />
+
+   <node name="act_map" pkg="act_map_ros" type="gp_trace_map_server_node" output="screen" args="-alsologtostderr --v=1" clear_params="true">
+     <rosparam command="load" file="$(find act_map_ros)/params/act_map_mfov_urban.yaml"/>
+     <param name="gp_vis_dir" value="$(find act_map)/params/fov_approximator_gp/fov45_fs30_lm1000_k10_fast" />
+     <param name="viz_kvox_best_view" value="true" />
+     <param name="viz_bview_incremental_every_n" value="8" />
+     <param name="features3d_topic_name" value="/svo/features3d" />
+     <param name="body_pose_topic_name" value="/svo/Twb" />
+   </node>
+
+   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find act_map_ros)/cfgs/full_exp.rviz" if="$(arg rviz)"/>
+
+</launch>

@@ -1,0 +1,68 @@
+colors:
+  none: red
+  gp_trace: green
+  gp_det: green
+  quad_trace_0p5: blue
+  quad_det_0p5: blue
+  quad_trace_0p8: deepskyblue
+  quad_det_0p8: deepskyblue
+  pc_trace: black
+  pc_det: black
+linestyles:
+  none: solid
+  gp_trace: dashed
+  gp_det: solid
+  quad_trace_0p5: dashed
+  quad_det_0p5: solid
+  quad_trace_0p8: dashed
+  quad_det_0p8: solid
+  pc_trace: dashed
+  pc_det: solid
+labels:
+  none: "No Info."
+  gp_trace: GP-Trace
+  gp_det: GP-Det
+  quad_det_0p5: Quad-Det-0.5
+  quad_trace_0p5: Quad-Trace-0.5
+  quad_det_0p8: Quad-Det-0.8
+  quad_trace_0p8: Quad-Trace-0.8
+  pc_det: PC-Det
+  pc_trace: PC-Trace
+ordered_types:
+  - none
+  - quad_det_0p5
+  - quad_trace_0p5
+  - quad_det_0p8
+  - quad_trace_0p8
+  - pc_det
+  - pc_trace
+  - gp_trace
+  - gp_det
+solve_time_table:
+  - gp_det
+  - gp_trace
+  - quad_det_0p5
+  - quad_trace_0p5
+  - quad_det_0p8
+  - quad_trace_0p8
+  - pc_det
+  - pc_trace
+  - none
+iter_cost_plot:
+  det:
+    - gp_det
+    - quad_det_0p5
+    - pc_det
+  trace:
+    - gp_trace
+    - quad_trace_0p5
+    - pc_trace
+  all:
+    - gp_det
+    - gp_trace
+    - quad_det_0p5
+    - quad_trace_0p5
+    - pc_det
+    - pc_trace
+hist_max_trans_e: 0.5
+hist_max_rot_e: 5

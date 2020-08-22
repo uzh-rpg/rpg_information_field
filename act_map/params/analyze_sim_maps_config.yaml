@@ -1,0 +1,48 @@
+all_maps:
+  - quad_info_0p5: Q-I-0.5
+  - quad_trace_0p5: Q-T-0.5
+  - quad_info_0p8: Q-I-0.8
+  - quad_trace_0p8: Q-T-0.8
+  - gp_info-fs30_k15: G-I-30
+  - gp_info-fs50_k15: G-I-50
+  - gp_info-fs70_k15: G-I-70
+  - gp_info-fs100_k15: G-I-100
+  - gp_info-fs120_k15: G-I-120
+  - gp_info-fs150_k15: G-I-150
+  - gp_trace-fs30_k15: G-T-30
+  - gp_trace-fs50_k15: G-T-50
+  - gp_trace-fs70_k15: G-T-70
+  - gp_trace-fs100_k15: G-T-100
+  - gp_trace-fs120_k15: G-T-120
+  - gp_trace-fs150_k15: G-T-150
+sel_complexity_table_entries:
+  - quad_info_0p5
+  - quad_trace_0p5
+  - gp_info-fs30_k15
+  - gp_info-fs70_k15
+  - gp_info-fs150_k15
+  - gp_trace-fs30_k15
+  - gp_trace-fs70_k15
+  - gp_trace-fs150_k15
+sel_fro_norm_table_entries:
+  - quad_info_0p5
+  - quad_info_0p8
+  - gp_info-fs30_k15
+  - gp_info-fs70_k15
+sel_hist_orient_entries:
+  - quad_info_0p5
+  - quad_info_0p8
+  - gp_info-fs30_k15
+  - gp_info-fs70_k15
+sel_n_ftr:
+  - gp_info-fs30_k15: 30
+  - gp_info-fs50_k15: 50
+  - gp_info-fs70_k15: 70
+  - gp_info-fs100_k15: 100
+  - gp_info-fs120_k15: 120
+  - gp_info-fs150_k15: 150
+sel_cont_motion_plot:
+  - gp_info-fs30_k15
+  - gp_info-fs70_k15
+  - gp_info-fs120_k15
+  - gp_info-fs150_k15

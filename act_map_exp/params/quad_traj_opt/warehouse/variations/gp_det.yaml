@@ -1,0 +1,3 @@
+node: quad_traj_opt_gp_info
+type: gp_det
+info_metric_type: det

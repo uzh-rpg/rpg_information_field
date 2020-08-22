@@ -1,0 +1,33 @@
+<launch>
+  <node name="voxblox_node" pkg="voxblox_ros" type="esdf_server" output="screen" args="" clear_params="true">
+    <remap from="pointcloud" to="/ue_provider/sensor_pc"/>
+    <param name="use_tf_transforms" value="true" />
+    <remap from="freespace_pointcloud" to="/ue_provider/freespace_pc"/>
+    <param name="use_freespace_pointcloud" value="true" />
+
+    <param name="slice_level" value="3" />
+
+    <param name="method" value="simple" />
+    <param name="voxel_carving_enabled" value="true" />
+    <param name="color_mode" value="colors" />
+    <param name="use_const_weight" value="false" />
+
+    <param name="update_mesh_every_n_sec" value="-1.0" />
+    <param name="update_esdf_every_n_sec" value="10.0" />
+    <param name="publish_map_every_n_sec" value="-1.0" />
+    <param name="verbose" value="true" />
+    <param name="publish_slices" value="true" />
+    <param name="publish_pointclouds" value="true" />
+    <param name="publish_esdf_map" value="true" />
+    <param name="publish_tsdf_map" value="true" />
+    <remap from="voxblox_node/esdf_map_out" to="esdf_map" />
+    <remap from="voxblox_node/tsdf_map_out" to="tsdf_map" />
+
+    <rosparam file="$(find act_map_ros)/params/voxblox_warehouse_extrinsics.yaml"/>
+    <rosparam file="$(find act_map_ros)/params/voxblox_warehouse_scale.yaml"/>
+
+    <param name="mesh_filename" value="$(find voxblox_ros)/mesh_results/$(anon warehouse).ply" />
+
+  </node>
+
+</launch>

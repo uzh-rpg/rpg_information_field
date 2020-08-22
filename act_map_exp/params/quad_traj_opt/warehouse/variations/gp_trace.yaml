@@ -1,0 +1,3 @@
+node: quad_traj_opt_gp_trace
+type: gp_trace
+info_metric_type: trace

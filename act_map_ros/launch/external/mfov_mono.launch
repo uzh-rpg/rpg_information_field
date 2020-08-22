@@ -1,0 +1,15 @@
+<launch>
+  <!-- SVO -->
+  <node pkg="svo_ros" type="svo_node" name="svo" clear_params="true" output="screen">
+    <!-- Camera and IMU topics to subscribe to -->
+    <param name="cam0_topic" value="/cam0/image_raw" type="str" />
+    <param name="calib_file" value="$(find act_map_ros)/params/calib/mfov_pinhole.yaml" type="str" />
+
+    <rosparam file="$(find svo_ros)/param/pinhole.yaml" />
+    <rosparam file="$(find act_map_ros)/params/mfov_mono.yaml" />
+  </node>
+
+  <!-- RVIZ + SVO GUI -->
+  <!--node name="vis" pkg="rviz" type="rviz" args=" -d $(find svo_ros)/rviz_config.rviz" /-->
+  <node name="svo_gui" pkg="rqt_gui" type="rqt_gui" args="-s rqt_svo.svo.Svo --args --topic svo" />
+</launch>

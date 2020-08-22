@@ -1,0 +1,16 @@
+robot_radius: 2.0
+rrt_range: [-22.5, 2.5, 14.5, 64.5, 1.0, 3.0]
+
+# use for integration
+#info_pot_n_random_lm: 200
+#info_pot_min_depth_m: 0.3
+#info_pot_max_depth_m: 1.0
+
+# use for validity checker
+info_pot_n_random_lm: 75
+info_pot_min_depth_m: 0.3
+info_pot_max_depth_m: 1.0
+
+info_metric_use_log_det: true
+info_pot_average_over_n: 50
+info_pot_use_negative_info: false

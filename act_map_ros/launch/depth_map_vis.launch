@@ -1,0 +1,13 @@
+<launch>
+   <node name="depth_map" pkg="act_map_ros" type="depth_map_server_node" output="screen" args="-alsologtostderr --v=1" clear_params="true">
+     <param name="depth_proto" value="$(find act_map)/exp_data/warehouse/depthmap.proto" />
+     <param name="points3d_txt" value="$(find act_map)/exp_data/warehouse/warehouse_points3D.txt" />
+     <param name="depth_layer_vox_size" value="1" />
+     <param name="depth_layer_vox_per_side" value="3" />
+     <param name="depth_vox_deg_step" value="2" />
+     <param name="dm_server_max_depth" value="15" />
+   </node>
+
+ <!--<node type="rviz" name="rviz" pkg="rviz" args="-d $(find act_map_ros)/cfgs/depth_map.rviz" />-->
+
+</launch>

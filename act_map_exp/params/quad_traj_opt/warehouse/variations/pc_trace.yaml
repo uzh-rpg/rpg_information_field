@@ -1,0 +1,4 @@
+node: quad_traj_opt_gp_info
+type: pc_trace
+info_metric_type: trace
+calculate_info_from_pc: true

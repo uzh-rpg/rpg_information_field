@@ -1,0 +1,18 @@
+<launch>
+   <node name="ue_provider" pkg="act_map_ros" type="ue_provider_node" output="screen" args="-alsologtostderr --v=1" clear_params="true">
+     <param name="pub_hz" value="5" />
+     <param name="focal" value="320" />
+     <param name="img_h" value="480" />
+     <param name="img_w" value="640" />
+     <param name="pub_depth_as_img" value="false" />
+     <param name="max_depth" value="30" />
+
+     <param name="use_freespace_pc" value="true" />
+     <param name="freespace_pc_n_step" value="20" />
+
+    <param name="automatic_scan" value="true" />
+    <param name="auto_pos_step" value="3" />
+    <param name="auto_yaw_step_deg" value="45" />
+    <rosparam param="auto_scan_ranges">[-23.0, 3.0, 14.0, 62.0, 1.0, 7.0]</rosparam>
+   </node>
+</launch>
