@@ -67,7 +67,7 @@ First install ROS according to the [official instruction](http://wiki.ros.org/me
 Then install some system dependencies:
 ```sh
 sudo apt install python-pip python-catkin-tools python-vcstool libgoogle-glog-dev libatlas-base-dev libeigen3-dev  libsuitesparse-dev
-pip install pyquanternion plotly GPy tqdm jupyter
+pip install pyquaternion plotly GPy tqdm jupyter
 ```
 
 Install `Ceres` from source if you have not yet according to [the official instruction](http://ceres-solver.org/installation.html#linux) (you can directly start from the point of extracting the source code).
