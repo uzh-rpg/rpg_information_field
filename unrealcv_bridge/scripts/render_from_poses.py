@@ -26,9 +26,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('ue_pose_txt', type=str)
 
-    parser.add_argument('--img_width', type=int, default=640)
-    parser.add_argument('--img_height', type=int, default=480)
-    parser.add_argument('--fov_deg', type=float, default=90.0)
+    parser.add_argument('--unrealcv_ini', type=str, required=True)
 
     parser.add_argument('--save_sleep_sec', type=float, default=0.3)
 
@@ -39,8 +37,10 @@ if __name__ == '__main__':
 
     parser.add_argument('--save_depth', action='store_true', dest='save_depth')
     parser.add_argument('--vis_depth', action='store_true', dest='vis_depth')
-    parser.add_argument('--z_depth', action='store_true', dest='zdepth')
-    parser.add_argument('--ray_depth', action='store_false', dest='zdepth')
+    parser.add_argument('--z_depth', action='store_true', dest='zdepth',
+                        help='use depth along the optical axis')
+    parser.add_argument('--ray_depth', action='store_false', dest='zdepth',
+                        help='use depth along the projection ray')
 
     parser.set_defaults(save_depth=False, vis_depth=False, zdepth=True)
     args = parser.parse_args()
@@ -80,6 +80,9 @@ if __name__ == '__main__':
     print(Fore.YELLOW + '- images: {}'.format(img_dir))
     print(Fore.YELLOW + '- intrinsics: {}'.format(cam_fn))
 
+    cam_intri = uu.readCameraIntri(args.unrealcv_ini)
+    print("Read camera intrinsics: {}".format(cam_intri))
+
     client.connect()
     assert client.isconnected()
     st = uu.getUnrealcvStatus(client)
@@ -88,9 +91,11 @@ if __name__ == '__main__':
     times, poses_ue = uu.readUnrealPoses(args.ue_pose_txt)
     print('Read {} Unreal poses.'.format(len(poses_ue)))
 
-    print(Fore.RED + "Step 1: set camera intrinsics")
-    uu.setCameraIntri(client, args.img_width, args.img_height, args.fov_deg)
-    focal = uu.focalLength(args.img_width, args.fov_deg)
+    print(Fore.RED + "Step 1: check intri and calculate focal")
+    st = uu.getUnrealcvStatus(client)
+    print(Fore.GREEN + "Intrinsics from unrealcv command" + st)
+    print(Fore.GREEN + "Intrisincs from the configuration file {}".format(cam_intri))
+    focal = uu.focalLength(cam_intri['width'], cam_intri['horizontal_fov'])
     print('- The focal length is {}px.'.format(focal))
 
     img_names = []
@@ -133,8 +138,8 @@ if __name__ == '__main__':
         poses_colmap.append(qtvec_i)
 
         intri_str_i = 'PINHOLE {} {} {} {} {} {}'.format(
-            args.img_width, args.img_height, focal, focal,
-            args.img_width/2.0, args.img_height/2.0)
+            cam_intri['width'], cam_intri['height'], focal, focal,
+            cam_intri['width']/2.0, cam_intri['height']/2.0)
         intri_str_colmap.append(intri_str_i)
 
     with open(colmap_pose_fn, 'w') as f:

@@ -4,8 +4,6 @@
 
 > :pushpin: For an earlier version of this work that was published at ICRA 19, please checkout the `icra19` branch.
 
-> :loudspeaker: The simulation environment (using NVIDIA Isaac) and evaluation pipeline (using COLMAP) will be added in Sep. 2020.
-
 This repository contains an implementation of the **Fisher Information Field** (FIF for short), a map representation designed for perception-aware planning.
 The core function of the map is to evaluate the visual localization quality at a given 6 DoF pose in a known environment (consisting of 3D landmarks to localize against).
 It can be used with different motion planning algorithms (e.g., RRT-star, trajectory optimization) to take localization quality into consideration, in addition to common planning objectives (collision free, low dynamic cost, start and end states etc).
@@ -90,6 +88,22 @@ cd ..
 catkin build 
 ```
 
+### Download the Simulation Environment
+
+We provide the photo-realistic simulation environment used in our paper as a standalone application, downloadable [here](http://rpg.ifi.uzh.ch/datasets/FIF/warehouse_bin.zip). It is built with UnrealEngine (NVIDIA Isaac Sim 1.2) and uses [UnrealCV](https://unrealcv.org/) to to query images and depths. Note that you will need the environment only for the motion planning experiments in `act_map_exp` but not the core functionalities of FIF.
+
+To start the environment, run the following:
+
+```sh
+./IsaacSimProject.sh -WINDOWED
+```
+
+and you should see a first person view in a warehouse environment, where you can control with your keyboard and mouse like FPS games (press '\`' to get mouse from the game). If you want to change the intrinsics of the camera (resolution and the FoV), you need to change the configuration in `LinuxNoEditor/IsaacSimProject/Binaris/Linux/unrealcv.ini` **before starting the simulation**.
+
+We mostly use the simulation as a server: you can start it and let it run in the background, and we will query images and depths from it using the commands provided by UnrealCV (implemented in `unrealcv_bridge` package).
+
+> If you want to modify the environment or create your own, please see [the instruction of how to set up and use the Isaac Sim](./isaac_setup.md). Note that this would require [a relatively powerful computer](https://docs.nvidia.com/isaac/isaac_sim/setup.html#machine-configuration).
+
 ## Get Started
 
 **For the core function of the FIF**, please check the [documentation](act_map/README.md) in the `act_map` package, including:
@@ -100,4 +114,4 @@ catkin build
 **For the integration of FIF with motion planning algorithms**, please check the [documentation](act_map_exp/README.md) in the `act_map_exp` package, including
 * Complete examples of using FIF in RRT* and trajectory optimization along with common planning objectives.
 * Runnable code for the motion planning experiments in the paper
-* (**TO BE RELEASED**) Quantitative evaluation of the localization accuracy in photorealistic simulation.
+* Quantitative evaluation of the localization accuracy in photorealistic simulation.
