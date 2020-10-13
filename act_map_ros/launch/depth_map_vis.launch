@@ -1,7 +1,7 @@
 <launch>
    <node name="depth_map" pkg="act_map_ros" type="depth_map_server_node" output="screen" args="-alsologtostderr --v=1" clear_params="true">
-     <param name="depth_proto" value="$(find act_map)/exp_data/warehouse/depthmap.proto" />
-     <param name="points3d_txt" value="$(find act_map)/exp_data/warehouse/warehouse_points3D.txt" />
+     <param name="depth_proto" value="$(find act_map_exp)/exp_data/warehouse_depth_and_landmarks/depthmap.proto" />
+     <param name="points3d_txt" value="$(find act_map_exp)/exp_data/warehouse_depth_and_landmarks/warehouse_points3D_r2_a20.txt" />
      <param name="depth_layer_vox_size" value="1" />
      <param name="depth_layer_vox_per_side" value="3" />
      <param name="depth_vox_deg_step" value="2" />

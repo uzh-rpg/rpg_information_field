@@ -65,6 +65,9 @@ if __name__ == '__main__':
     parser.add_argument('--base_model', required=True,
                         help='colmap workspace against which to localize')
 
+    parser.add_argument('--unrealcv_ini', required=True,
+                        help='unrealcv configuration (for camera intrinsics)')
+
     parser.add_argument('--no_clear_output', action='store_false', dest='clear_output')
 
     parser.add_argument('--skip_plan', action='store_true', dest='skip_plan')
@@ -177,7 +180,8 @@ if __name__ == '__main__':
                         print(Fore.RED + "Cannot find UE poses, plan failed? CONTINUE TO NEXT.")
                         continue
                     render_cmd = ("rosrun unrealcv_bridge render_from_poses.py {} --save_dir {}"
-                                  " --save_sleep_sec 0.1").format(ue_pose_fn, render_dir_i)
+                                  " --save_sleep_sec 0.1 --unrealcv_in {}").format(
+                                      ue_pose_fn, render_dir_i, args.unrealcv_ini)
                     print(Fore.BLUE + render_cmd)
                     subprocess.call(shlex.split(render_cmd))
                 else:

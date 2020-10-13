@@ -1,6 +1,7 @@
 #!/usr/bin/env python2
 
 import numpy as np
+import os
 import StringIO
 
 from colorama import Fore, init
@@ -14,13 +15,29 @@ def DepthConversion(PointDepth, f):
     W = PointDepth.shape[1]
     i_c = np.float(H) / 2 - 1
     j_c = np.float(W) / 2 - 1
-    columns, rows = np.meshgrid(np.linspace(0, W-1, num=W), np.linspace(0, H-1, num=H))
+    columns, rows = np.meshgrid(np.linspace(
+        0, W-1, num=W), np.linspace(0, H-1, num=H))
     DistanceFromCenter = ((rows - i_c)**2 + (columns - j_c)**2)**(0.5)
     PlaneDepth = PointDepth / (1 + (DistanceFromCenter / f)**2)**(0.5)
     return PlaneDepth
 
 
+def readCameraIntri(ini_fn):
+    assert os.path.exists(ini_fn)
+    import configparser
+    cfg = configparser.ConfigParser()
+    cfg.read(ini_fn)
+    unreal_cv_k = 'UnrealCV.Core'
+    assert unreal_cv_k in cfg.sections()
+    cam_intri = cfg[unreal_cv_k]
+    return {'width': int(cam_intri['Width']),
+            'height': int(cam_intri['Height']),
+            'horizontal_fov': float(cam_intri['FOV'])}
+
+
 def setCameraIntri(client, w, h, wfov_deg, cam_id=0):
+    assert False, """use command line to set intrisics seesm not reliable, 
+    use the configuration file instead"""
     assert client.isconnected()
 
     res_cmd = "vrun r.setres {}x{}".format(int(w), int(h))
@@ -28,7 +45,8 @@ def setCameraIntri(client, w, h, wfov_deg, cam_id=0):
     res_size = client.request(res_cmd)
     print('  {}'.format(res_size))
 
-    fov_cmd = "vset /camera/{}/horizontal_fieldofview {}".format(cam_id, wfov_deg)
+    fov_cmd = "vset /camera/{}/horizontal_fieldofview {}".format(
+        cam_id, wfov_deg)
     print(Fore.BLUE + ">> " + fov_cmd)
     res_fov = client.request(fov_cmd)
     print('  {}'.format(res_fov))
@@ -105,4 +123,4 @@ def readUnrealPoses(fn):
 
 def focalLength(width, wfov_deg):
     half_wfov_rad = 0.5 * np.deg2rad(wfov_deg)
-    return np.tan(half_wfov_rad) * (width / 2.0)
+    return (width / 2.0) / np.tan(half_wfov_rad)

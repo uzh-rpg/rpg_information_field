@@ -12,15 +12,8 @@
   - [Quantitative Evaluation of the Localization Accuracy](#quantitative-evaluation-of-the-localization-accuracy)
   - [Run Many Experiments for Comparison](#run-many-experiments-for-comparison)
 
-> **NOTE**:
->
-> The experiments can be ran with the pre-built maps at this moment (08.2020).
-> The simulation environment and related stuff will be added soon:
-> * the simulation environment
-> * code and documentation about how to build the maps using the simulator
-> * code and documentation about how to evaluate the localization accuracy using the simulator and COLMAP
-
 # Package Overview
+
 This package provides two planners (RRT* and quadrotor trajectory optimization) that uses the FIF along with other planning objectives. The RRT* uses the interface for [ompl](https://ompl.kavrakilab.org/), and the trajectory optimizations uses [this open-source implementation](https://github.com/ethz-asl/mav_trajectory_generation).
 
 The main content of this package are:
@@ -36,13 +29,23 @@ The main content of this package are:
 The experiments are performed in the following warehouse environment, simulated using NVIDIA Isaac simulator:
 <img src="doc/ue_warehouse.png" width="500">
 
-We provide pre-built maps in the environment that are sufficient for running the experiments. Please go to the `exp_data` and run:
+**Download the Pre-built Maps** We provide pre-built maps in the environment that are sufficient for running the experiments. Please go to the `exp_data` and run:
+
 ```
 ./download.sh
 ```
-The simulation environment and the code for interacting with the simulator (for [building the maps](#map-generation-from-unrealengine) and [evaluation](#quantitative-evaluation-of-the-localization-accuracy)) will be added soon.
+This will download 
 
-Both the RRT* and trajectory optimization experiment follow a similar workflow. We first use trajectory optimization as a quick example and describe running other experiments in details later.
+* ESDF, FIF and [DepthMap](../act_map/advanced.md) for planning
+* COLMAP SfM models for [evaluating](#quantitative-evaluation-of-the-localization-accuracy) the localization accuracy on the planned motion
+
+You can also [build your own maps](#map-generation-from-unrealengine) (for customized or your own environment)
+
+**Simulator for Evaluation** The pre-built maps are sufficient to run the motion planning experiments, but to evaluate the localization accuracy of the poses from a planned trajectory/path, we need to run the photorealistic simulator (download [here](http://rpg.ifi.uzh.ch/datasets/FIF/warehouse_bin.zip) and run `./IsaacSimProject.sh -WINDOWED`). Also see `unrealcv_bridge` [documentation](../unrealcv_bridge/README.md) for more details.
+
+**The Planning Experiments** Both the RRT* and trajectory optimization experiment follow a similar workflow. We first use trajectory optimization as a quick example and describe running other experiments in details later.
+
+
 
 # A Quick Example
 
@@ -91,6 +94,7 @@ At this point, all the necessary information is loaded in the `quad_traj_opt` no
 ## Step 3. Run the Planner
 The planner state is specified in a yaml file, here `params/quad_traj_opt/warehouse/warehouse_traj_opt_trial.yaml`. The only thing that needs to be changed is the `save_traj_abs_dir` in the file, which needs to be point to an existing folder on your machine.
 This will be the folder where the planning results (time, intermediate results in optimization, sampled poses) will be saved. You can create a folder under `trace`
+
 ```sh
 # under act_map_exp/trace
 mkdir  -p quad_traj_opt/warehouse_trial
@@ -135,7 +139,7 @@ Next we describe the experiments in details, including how to generate maps for 
 ## Create Necessary Maps
 > Pre-built maps are provided under `exp_data`. You can skip this section if you only want to use the pre-built maps.
 
-Good maps are pre-requisite for the experiments. For the motion planning experiments, we need 1) ESDF for collision check, 2) SfM model for localization, 3) FIF for considering localization accuracy and 4) Densely sampled depth map for check occlusion.
+Good maps are pre-requisite for the experiments. For the motion planning experiments, we need **1)** ESDF for collision check, **2)** SfM model for localization, **3)** FIF for considering localization accuracy and **4)** Densely sampled depth map for check occlusion.
 
 ### Map Generation from UnrealEngine
 
@@ -161,6 +165,7 @@ where:
 * `<map_suf>` corresponds to the map under `exp_data/warehouse_depth_and_landmarks`. See `README` there for details.
 
 **Then** call the service to compute and save the map
+
 ```sh
 rosservice call /act_map/recompute_kernel_layer
 rosservice call /act_map/save_act_map_layers "file_path: '<abs_path>'"
@@ -170,15 +175,13 @@ We also provide a script `scripts/build_information_field_batch.py` to convenien
 
 
 ## Run a Single Experiment
-Once we have all the maps, running an experiment (RRT* or trajectory optimization) follows a similar procedure as the example above.
-Please read [the instructions](./run_a_single_exp.md) for details.
+Once we have all the maps, running an experiment (RRT* or trajectory optimization) follows a similar procedure as the example above. Please read [the dedicated instructions](./run_a_single_exp.md) for details.
 
 ## Quantitative Evaluation of the Localization Accuracy 
 
-After a trajectory/path is planned in a known environment, it is of interest to evaluate the localization accuracy of the poses from the planned motion (such as in Section VII-B of the [paper](http://rpg.ifi.uzh.ch/docs/Arxiv20_Zhang_FIF.pdf)). 
-To do this, one needs to be able to render the images from these poses and localize the rendered images against known landmarks. We (again) utilize [NVIDIA Isaac simulator](https://developer.nvidia.com/isaac-sim) and [COLMAP](https://colmap.github.io/) for photorealistic rendering and visual localization respectively.
-The simulation environment, the corresponding COLMAP/SfM model for localization and related scripts will be added soon.
-Please see [the instructions for quantitatively evaluting the localization accuracy](./evaluation_localization_accuracy.md) for details.
+After a trajectory/path is planned in a known environment, it is of interest to evaluate the localization accuracy of the poses from the planned motion (such as in Section VII-B of the [paper](http://rpg.ifi.uzh.ch/docs/Arxiv20_Zhang_FIF.pdf)). To do this, one needs to be able to render the images from these poses and localize the rendered images against known landmarks. We (again) utilize [NVIDIA Isaac simulator](https://developer.nvidia.com/isaac-sim) and [COLMAP](https://colmap.github.io/) for photorealistic rendering and visual localization respectively.
+
+Once you have the simulator running (as mentioned at the beginning of this insturction), please see [the instructions for quantitatively evaluting the localization accuracy](./evaluation_localization_accuracy.md) for details.
 
 ## Run Many Experiments for Comparison
 As in our paper, it is often needed to run many planning settings for comparison. We provide convenient setups for this.

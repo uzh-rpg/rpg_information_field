@@ -120,6 +120,9 @@ RPG_COMMON_MAIN
   vi_utils::PinholeCamPtr cam_ptr = std::make_shared<vi_utils::PinholeCam>(
       std::vector<double>{ 320.0, 320.0, 319.5, 319.5, 640.0, 640.0 }, Tbc);
   render.focal() = static_cast<float>(cam_ptr->fx());
+  std::cout << "The current camera parameters is :" << *cam_ptr << std::endl;
+  std::cout << "NOTE: make sure to change the camera parameters in the configuration file of the "
+            << "simulator BEFORE launching the simulation." << std::endl;
 
   // rendering
   voxblox::BlockIndexList all_blks;
@@ -198,4 +201,5 @@ RPG_COMMON_MAIN
               << blk_ptr->num_voxels() << " voxels." << std::endl;
   }
   dm.saveDepthLayer(trace_dir + "/depthmap.proto");
+  return 0;
 }

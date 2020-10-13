@@ -17,7 +17,7 @@ import unrealcv_utils as uu
 init(autoreset=True)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser("this script record the camera poses from UnrealEngine")
     parser.add_argument('--out_dir', type=str, required=True)
 
     parser.add_argument('--Hz', type=float, default=10)

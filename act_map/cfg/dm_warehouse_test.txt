@@ -1,0 +1,2 @@
+# xmin xmax ymin ymax zmin zmax vox_size vox_per_side
+-23 3 14 62 1 7 1.0 3

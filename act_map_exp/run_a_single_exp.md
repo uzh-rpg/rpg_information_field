@@ -87,7 +87,7 @@ With a planner where the Voxblox layers and information field are loaded, we fir
 ```bash
 rosservice call /<planner_node>/set_planner_state "config: '<abs_path_to_config>'"
 ```
-where `<abs_path_to_config>` is a yaml file containing all the parameters. An example can be found under `act_map_exp/params/quad_rrt/warehouse/warehouse_rrt_trial.yaml` and `act_map_exp/params/quad_traj_opt/warehouse_traj_opt_trial.yaml` for the RRT* and trajectory optimization experiment respectively.
+where `<abs_path_to_config>` is a yaml file containing all the parameters. An example can be found under `act_map_exp/params/quad_rrt/warehouse/warehouse_rrt_trial.yaml` and `act_map_exp/params/quad_traj_opt/warehouse_traj_opt_trial.yaml` for the RRT* and trajectory optimization experiment respectively. In the yaml file,  `save_traj_abs_dir` is the folder where the planning results will be saved and should point to an existing folder on your machine.
 
 ***Then*** run the planner
 ```bash
@@ -97,11 +97,11 @@ The results (e.g., sampled poses on the planned motion, time consumed) are saved
 
 At this point, you can call the `set_planner_state` service to run the experiment again without having to setup the maps from scratch.
 
-### 3.2 Evaluation
+### 3.2 Results and Evaluation
 
-> This section is under development.
+After the `plan_vis_save` service is called, planning results, such as different costs during the trajectory optimization, number of vertices/edges during RRT* execution and the sampled poses on the planned trajectory/path will be saved in the `save_traj_abs_dir` mentioned above.
 
-The planning results (time, planned motion) are saved in the `save_abs_dir` as specified in the parameter file. We do not have a script for analyzing the result of a single experiment. You can have a look at the `scripts/analyze_rrt.py` and `scripts/analyze_traj_opt.py`, which are designed for analyzing many experiment results altogether, to see how to parse the experiment results.
+The planner specific results (e.g., optimization cost for trajectory optimization, vertices for RRT*) are saved in plain text and should be read easily. See examples in scripts `analyze_rrt.py`  and `analyze_traj_opt.py`, where these results are read and compared across different experiments.
 
-For the localization accuracy, one needs to be able to render images from the poses of the planned motion and localize the images against the SfM model. This part will be added soon.
+To evaluate the localization quality of the planned motion, we need to render images from `stamped_Twc_ue.txt` and localize the rendered images with respect to a SfM model, as described [here](./evaluation_localization_accuracy.md)
 
